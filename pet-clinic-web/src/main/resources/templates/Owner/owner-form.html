@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/resources/css/style.css" th:href="@{/resources/css/style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <title>Find Owner</title>
+</head>
+<body>
+<header>
+    <div class="app-title-bar">
+        <div class="app-title-logo">
+            <img src="../static/resources/images/spring-pivotal-logo.png" alt="spring-pivotal-logo"
+                 th:src="@{/resources/images/spring-pivotal-logo.png}">
+        </div>
+
+        <div class="app-title-buttons">
+            <button class="button" onclick="location.href='/'"><i class="fas fa-home"></i> home</button>
+            <button class="button" onclick="location.href='/owners/find'"><i class="fas fa-search"></i>Search </button>
+            <button class="button" onclick="location.href='/vets/'"><i class="fas fa-list"></i>veterinarians</button>
+            <button class="button"><i class="fas fa-bug"></i>error</button>
+        </div>
+    </div>
+</header>
+<div class="wrap">
+    <h2>Find Owners</h2>
+
+    <form method="post" th:object="${owner}" th:action="@{save}">
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}">
+            <label>First Name</label>
+            <input type="text" class="form-control" th:placeholder="${owner.getFirstName()} ?:'First Name'" th:value="${owner.getFirstName()} ?:''" name="firstName">
+            <label>Last Name</label>
+            <input type="text" class="form-control" th:placeholder="${owner.getLastName()} ?:'Last Name'" th:value="${owner.getLastName()} ?:''" name="LastName">
+            <label>Address</label>
+            <input type="text" class="form-control" th:placeholder="${owner.getAddress()} ?:'Address'" th:value="${owner.getAddress()} ?:''" name="Address">
+            <label>City</label>
+            <input type="text" class="form-control" th:placeholder="${owner.getCity()} ?:'City'" th:value="${owner.getCity()} ?:''" name="City">
+            <label>Telephone</label>
+            <input type="text" class="form-control" th:placeholder="${owner.getTelephone()} ?:'Telephone'" th:value="${owner.getTelephone()} ?:''" name="Telephone">
+            <input type="hidden" th:field="*{pets}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save Owner</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/resources/css/style.css" th:href="@{/resources/css/style.css}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>Visit Detail</title>
+</head>
+<body>
+<header>
+    <div class="app-title-bar">
+        <div class="app-title-logo">
+            <img src="../static/resources/images/spring-pivotal-logo.png" alt="spring-pivotal-logo"
+                 th:src="@{/resources/images/spring-pivotal-logo.png}">
+        </div>
+
+        <div class="app-title-buttons">
+            <button class="button" onclick="location.href='/'"><i class="fas fa-home"></i> home</button>
+            <button class="button" onclick="location.href='/owners/find'"><i class="fas fa-search"></i>Search </button>
+            <button class="button" onclick="location.href='/vets/'"><i class="fas fa-list"></i>veterinarians</button>
+            <button class="button"><i class="fas fa-bug"></i>error</button>
+        </div>
+    </div>
+</header>
+<div class="wrap">
+    <table class="owner-table">
+        <caption>Pet Details</caption>
+        <thead>
+        <tr>
+            <th style="width: 150px;">Name</th>
+            <th style="width: 150px;">Birthday</th>
+            <th style="width: 50px;">Type</th>
+            <th style="width: 150px;">Owner</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row">
+            <td><p th:text="${visit.getPet().getName()}"></p></td>
+            <td><p th:text="${visit.getPet().getBirthday()}"></p> </td>
+            <td><p th:text="${visit.getPet().getPetType().getName()}"></p> </td>
+            <td><p th:text="${visit.getPet().getOwner().getLastName()}"></p></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <form method="post" th:object="${visit}" th:action="@{save}">
+        <div class="form-group">
+            <label>Date</label>
+            <br>
+            <input type="text" class="form-control" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" name="date">
+            <br>
+            <br>
+            <label>Description</label>
+            <br>
+            <textarea class="form-control" id="area" name="description"></textarea>
+            <input type="hidden" th:field="*{pet}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Save Visit</button>
+    </form>
+</div>
+</body>
+</html>
